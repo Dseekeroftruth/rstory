@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Gallery Gate</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        .container {
+            max-width: 960px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+        .header p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .blog-preview {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+        .blog-preview img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .blog-preview h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .blog-preview p {
+            font-size: 1em;
+            color: #555;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        #loading {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1em;
+            color: #007bff;
+        }
+        .token-info {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #007bff;
+        }
+        .token-info img {
+            float: right;
+            margin-left: 20px;
+            width: 100px;
+        }
+        .token-info h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        .token-info p {
+            font-size: 1em;
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.6;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        .hidden-content {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .hidden-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/waxjs@latest/dist/waxjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/anchor-link@latest/dist/anchor-link.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/anchor-link-browser-transport@latest/dist/anchor-link-browser-transport.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Blog and Token Information Header -->
+        <div class="header">
+            <h1>Blog Gallery Gate</h1>
+            <p>Access exclusive blog posts by connecting your wallet.</p>
+        </div>
+
+        <!-- Blog Preview Gallery -->
+        <div class="gallery">
+            <div class="blog-preview">
+                <img src="blog_image1.jpg" alt="Blog Image 1">
+                <h2>Blog Title 1</h2>
+                <p>A short preview of the blog content...</p>
+                <a class="button" href="full_blog_post_1.html">Read More</a>
+            </div>
+            <div class="blog-preview">
+                <img src="blog_image2.jpg" alt="Blog Image 2">
+                <h2>Blog Title 2</h2>
+                <p>A short preview of the blog content...</p>
+                <a class="button" href="full_blog_post_2.html">Read More</a>
+            </div>
+            <!-- Add more blog previews as needed -->
+        </div>
+
+        <a class="button" href="#" id="read-btn">Connect Anchor</a>
+        <a class="button" href="#" id="read-metamask">Connect MetaMask</a>
+
+        <!-- Hidden Full Blog Posts -->
+        <div class="hidden-content" id="high-res-content">
+            <h2>Full Blog Posts</h2>
+            <p><a class="button" href="full_blog_post_1.html">Go to Blog Post 1</a></p>
+            <p><a class="button" href="full_blog_post_2.html">Go to Blog Post 2</a></p>
+            <!-- Add more blog post links as needed -->
+        </div>
+
+        <!-- Tokenized Access Information Section -->
+        <div class="token-info">
+            <img src="logo180.png" alt="Rstory logo" />
+            <h1>Tokenized Access to Exclusive Blog Content</h1>
+            <p>Connect your wallet to verify your ownership of Rstory tokens. If you hold an Rstory token, you can access exclusive full blog posts and more.</p>
+            <div id="loading">Page loading...</div>
+            <p>Click the button below to connect your Anchor wallet or MetaMask wallet. If there's at least one Rstory token in your wallet, the full blog post links will become accessible.</p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript functionality from the provided template will be integrated here for tokenized access and wallet connection.
+        const dapp = "rstory";
+        let login_use = "";
+        let wallet_userAccount = "none";
+        let wallet_session = null;
+
+        const eos = new waxjs.WaxJS({
+            rpcEndpoint: 'https://eos.greymass.com'
+        });
+
+        const transport = new AnchorLinkBrowserTransport();
+        const anchorLink = new AnchorLink({
+            transport,
+            chains: [{
+                chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
+                nodeUrl: 'https://eos.greymass.com',
+            }]
+        });
+
+        function loginEos(anchor) {
+            login_use = anchor;
+            if (anchor) {
+                login_anchor();
+            } else {
+                login_eosjs().then(function (retorno) {
+                    wallet_userAccount = retorno;
+                    checkToken();
+                });
+            }
+        }
+
+        function login_anchor() {
+            anchorLink.login(dapp).then((result) => {
+                wallet_session = result.session;
+                wallet_userAccount = wallet_session.auth.actor;
+                checkToken();
+            }).catch(error => {
+                console.error("Anchor login failed:", error);
+            });
+        }
+
+        async function login_eosjs() {
+            try {
+                let userAccount = await eos.login();
+                return userAccount;
+            } catch (e) {
+                document.getElementById("loading").innerHTML = e.message;
+                return false;
+            }
+        }
+
+        function checkToken() {
+            const eosApiUrl = "https://eos.eosphere.io/";
+            const TokenContract = "rstorytokens";
+            const TokenSymbol = "RSTORY";
+            const jsonData = JSON.stringify({
+                "json": true,
+                "code": TokenContract,
+                "scope": wallet_userAccount,
+                "table": "accounts",
+                "limit": 10
+            });
+
+            fetch(eosApiUrl + "v1/chain/get_table_rows", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: jsonData
+            })
+            .then(response => response.json())
+            .then(data => {
+                let TokenFound = false;
+                data.rows.forEach(value => {
+                    if (value.balance &&
+
+value.balance.includes(TokenSymbol)) {
+                        TokenFound = true;
+                        reveal();
+                        document.getElementById("loading").innerHTML = "You have " + value.balance;
+                    }
+                });
+                if (!TokenFound) {
+                    document.getElementById("loading").innerHTML = "You must possess RSTORY to access the material";
+                }
+            })
+            .catch(error => {
+                console.error("Error checking token:", error);
+            });
+        }
+
+        async function connectMetaMask() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                    handleAccountsChanged(accounts);
+                } catch (error) {
+                    if (error.code === 4001) {
+                        console.log('Please connect to MetaMask.');
+                    } else {
+                        console.error("MetaMask connection error:", error);
+                    }
+                }
+            } else {
+                alert('MetaMask is not installed. Please install MetaMask to use this feature.');
+            }
+        }
+
+        function handleAccountsChanged(accounts) {
+            if (accounts.length === 0) {
+                console.log('Please connect to MetaMask.');
+            } else {
+                const account = accounts[0];
+                checkMetaMaskToken(account);
+            }
+        }
+
+        async function checkMetaMaskToken(account) {
+            const contractAddress = '0xa9deffb371dd9c7fd2cfc6676cdb3bc394b45a42';
+            const abi = [
+                {
+                    "constant": true,
+                    "inputs": [{ "name": "_owner", "type": "address" }],
+                    "name": "balanceOf",
+                    "outputs": [{ "name": "balance", "type": "uint256" }],
+                    "type": "function"
+                }
+            ];
+
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const contract = new ethers.Contract(contractAddress, abi, provider);
+
+            try {
+                const balance = await contract.balanceOf(account);
+                if (balance.gt(0)) {
+                    reveal();
+                    document.getElementById('loading').innerHTML = `You have ${ethers.utils.formatUnits(balance, 18)} TUDEs.`;
+                } else {
+                    document.getElementById('loading').innerHTML = 'You must possess TUDE to access the material';
+                }
+            } catch (error) {
+                console.error("Error checking MetaMask token:", error);
+            }
+        }
+
+        document.getElementById('read-btn').addEventListener('click', () => loginEos(true));
+        document.getElementById('read-metamask').addEventListener('click', connectMetaMask);
+
+        function reveal() {
+            // Reveal the high-resolution content by displaying it
+            document.getElementById('high-res-content').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
