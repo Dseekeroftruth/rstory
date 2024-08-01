@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Album Preview Gate</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            color: #333;
+        }
+        .container {
+            max-width: 960px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #007bff;
+        }
+        .header p {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.6;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        .button {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+        #loading {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1em;
+            color: #007bff;
+        }
+        .token-info {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 2px solid #007bff;
+        }
+        .token-info img {
+            float: right;
+            margin-left: 20px;
+            width: 100px;
+        }
+        .token-info h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        .token-info p {
+            font-size: 1em;
+            margin-bottom: 20px;
+            color: #555;
+            line-height: 1.6;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        .hidden-content {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .hidden-content img, .hidden-content audio {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        .hidden-content audio {
+            margin-top: 20px;
+            width: 100%;
+        }
+        .preview {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .preview audio {
+            margin-top: 10px;
+            width: 100%;
+        }
+        .streaming-links {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .streaming-links a {
+            margin: 0 10px;
+            color: #007bff;
+            text-decoration: underline;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/waxjs@latest/dist/waxjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/anchor-link@latest/dist/anchor-link.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/anchor-link-browser-transport@latest/dist/anchor-link-browser-transport.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Artist and Music Album Information Header -->
+        <div class="header">
+            <h1>Album Name</h1>
+            <p>by [Artist Name]</p>
+            <p>[This is a dynamic description area where you can add as much text as needed. The description text will wrap and adjust its layout automatically, ensuring readability and proper spacing. The content should provide an overview of the album, its features, and any other relevant information about the artist and the album itself.]</p>
+        </div>
+        
+        <!-- Image and Album Cover Gallery -->
+        <div class="gallery">
+            <img src="low_res_album_cover1.jpg" alt="Album Cover 1" />
+            <img src="low_res_album_cover2.jpg" alt="Album Cover 2" />
+            <img src="low_res_album_cover3.jpg" alt="Album Cover 3" />
+            <img src="low_res_album_cover4.jpg" alt="Album Cover 4" />
+            <img src="low_res_album_cover5.jpg" alt="Album Cover 5" />
+            <!-- Add as many images as needed; the grid will automatically adjust -->
+        </div>
+
+        <!-- Song Previews -->
+        <div class="preview">
+            <h2>Preview Tracks</h2>
+            <audio controls>
+                <source src="preview_track1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <p>Track 1 - [Track Name]</p>
+
+            <audio controls>
+                <source src="preview_track2.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <p>Track 2 - [Track Name]</p>
+
+            <!-- Add more previews as needed -->
+        </div>
+
+        <a class="button" href="#" id="read-btn">Connect Anchor</a>
+        <a class="button" href="#" id="read-metamask">Connect MetaMask</a>
+
+        <!-- Hidden High-Resolution Content -->
+        <div class="hidden-content" id="high-res-content">
+            <h2>High-Resolution Album Covers and Full Tracks</h2>
+            <img src="high_res_album_cover1.jpg" alt="High-Res Album Cover 1" />
+            <audio controls>
+                <source src="full_track1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <img src="high_res_album_cover2.jpg" alt="High-Res Album Cover 2" />
+            <audio controls>
+                <source src="full_track2.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+            <!-- Add more high-res album covers and full tracks as needed -->
+            <p><a class="button" href="full_album_page.html">View Full Album Page</a></p>
+        </div>
+
+        <!-- Streaming Links Section -->
+        <div class="streaming-links">
+            <h2>Stream on Your Favorite Platform</h2>
+            <a href="spotify_link" target="_blank">Spotify</a>
+            <a href="apple_music_link" target="_blank">Apple Music</a>
+            <a href="soundcloud_link" target="_blank">SoundCloud</a>
+            <!-- Add more streaming links as needed -->
+        </div>
+
+        <!-- Tokenized Access Information Section -->
+        <div class="token-info">
+            <img src="logo180.png" alt="Rstory logo" />
+            <h1>Tokenized Access to Music Albums</h1>
+            <p>Rstory is a crypto token with zero decimals that operates on multiple blockchains. Rstory tokens are called tudes. Each one represents an indivisible unit of gratitude.</p>
+            <p>The symbol for <a href="https://etherscan.io/token/0xa9deffb371dd9c7fd2cfc6676cdb3bc394b45a42">Rstory on Ethereum</a> is TUDE. The contract address is 0xa9deffb371dd9c7fd2cfc6676cdb3bc394b45a42. The symbol for Rstory on EOS is RSTORY, created by the rstorytokens account. It can be viewed on <a href="https://bloks.io/tokens/RSTORY-eos-rstorytokens">Blocks.io here</a>. Read the revised <a href="https://rstory.io/rstory-whitepaper.pdf">whitepaper here</a>. Announcements can be found on the official <a href="https://hive.blog/@rstory">Rstory communication channel</a>. Join us <a href="https://t.me/+m-WEaUc7Ud8yY2Qx">on Telegram</a> to learn more.</p>
+            <div id="loading">Page loading...</div>
+            <p>Possession of an Rstory token grants the bearer the right to access exclusive music albums for free. Click the button below to connect your Anchor wallet or MetaMask wallet. If there's at least one Rstory token in your wallet, the high-resolution album covers, full tracks, and full album page link will become accessible.</p>
+        </div>
+    </div>
+
+    <script>
+        const dapp = "rstory";
+        let login_use = "";
+        let wallet_userAccount = "none";
+        let wallet_session = null;
+
+        const eos = new waxjs.WaxJS({
+            rpcEndpoint: 'https://eos.greymass.com'
+        });
+
+        const transport = new AnchorLinkBrowserTransport();
+        const anchorLink = new AnchorLink({
+            transport,
+            chains: [{
+                chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
+                nodeUrl: 'https://eos.greymass.com',
+            }]
+        });
+
+        function loginEos(anchor) {
+            login_use = anchor;
+            if (anchor) {
+                login_anchor();
+            } else {
+                login_eosjs().then(function (retorno) {
+                    wallet_userAccount = retorno;
+                    checkToken();
+                });
+            }
+        }
+
+        function login_anchor() {
+            anchorLink.login(dapp).then((result) => {
+                wallet_session = result.session;
+                wallet_userAccount = wallet_session.auth.actor;
+                checkToken();
+            }).catch(error => {
+                console.error("Anchor login failed:", error);
+            });
+        }
+
+        async function login_eosjs() {
+            try {
+                let userAccount = await eos.login();
+                return userAccount;
+            } catch (e) {
+                document.getElementById("loading").innerHTML = e.message;
+                return false;
+            }
+        }
+
+        function checkToken() {
+            const eosApiUrl = "https://eos.eosphere.io/";
+            const TokenContract = "rstorytokens";
+            const TokenSymbol = "RSTORY";
+            const jsonData = JSON.stringify({
+                "json": true,
+                "code": TokenContract,
+                "scope": wallet_userAccount,
+                "table": "accounts",
+                "limit": 10
+            });
+
+            fetch(eosApiUrl + "v1/chain/get_table_rows", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: jsonData
+            })
+            .then(response => response.json())
+            .then(data => {
+                let TokenFound = false;
+                data.rows.forEach(value => {
+                    if (value.balance && value.balance.includes(TokenSymbol)) {
+                        TokenFound = true;
+                        reveal();
+                        document.getElementById("loading").innerHTML = "You have " + value.balance;
+                    }
+                });
+                if (!TokenFound) {
+                    document.getElementById("loading").innerHTML = "You must possess RSTORY to access the material";
+                }
+            })
+            .catch(error => {
+                console.error("Error checking token:", error);
+            });
+        }
+
+        async function connectMetaMask() {
+            if (typeof window.ethereum !== 'undefined') {
+                try {
+                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+                    handleAccountsChanged(accounts);
+                } catch (error) {
+                    if (error.code === 4001) {
+                        console.log('Please connect to MetaMask.');
+                    } else {
+                        console.error("MetaMask connection error:", error);
+                    }
+                }
+            } else {
+                alert('MetaMask is not installed. Please install MetaMask to use this feature.');
+            }
+        }
+
+        function handleAccountsChanged(accounts) {
+            if (accounts.length === 0) {
+                console.log('Please connect to MetaMask.');
+            } else {
+                const account = accounts[0];
+                checkMetaMaskToken(account);
+            }
+        }
+
+        async function checkMetaMaskToken(account) {
+            const contractAddress = '0xa9deffb371dd9c7fd2cfc6676cdb3bc394b45a42';
+            const abi = [
+                {
+                    "constant": true,
+                    "inputs": [{ "name": "_owner", "type": "address" }],
+                    "name": "balanceOf",
+                    "outputs": [{ "name": "balance", "type": "uint256" }],
+                    "type": "function"
+                }
+            ];
+
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
+            const contract = new ethers.Contract(contractAddress, abi, provider);
+
+            try {
+                const balance = await contract.balanceOf(account);
+                if (balance.gt(0)) {
+                    reveal();
+                    document.getElementById('loading').innerHTML = `You have ${ethers.utils.formatUnits(balance, 18)} TUDEs.`;
+                } else {
+                    document.getElementById('loading').innerHTML = 'You must possess TUDE to access the material';
+                }
+            } catch (error) {
+                console.error("Error checking MetaMask token:", error);
+            }
+        }
+
+        document.getElementById('read-btn').addEventListener('click', () => loginEos(true));
+        document.getElementById('read-metamask').addEventListener('click', connectMetaMask);
+
+        function reveal() {
+            // Reveal the high-resolution content by displaying it
+            document.getElementById('high-res-content').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
