@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Well Do Ya?</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            text-align: center;
+            background-color: #1a1a1a;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            background-color: #333;
+            color: #ff6347;
+            padding: 20px;
+            margin: 0;
+            font-size: 3em;
+            text-transform: uppercase;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .gallery-item {
+            margin: 15px;
+            background-color: #444;
+            border: 2px solid #555;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+        }
+        .gallery-item p {
+            padding: 15px;
+            margin: 0;
+            background-color: #222;
+            border-top: 1px solid #333;
+        }
+        .gallery-item p.title {
+            font-weight: bold;
+            color: #ff6347;
+            font-size: 1.2em;
+        }
+        .gallery-item p.description {
+            color: #ddd;
+            font-size: 1em;
+            line-height: 1.4;
+            min-height: 60px; /* Adjust this value to fit your design */
+        }
+        @media (max-width: 600px) {
+            .gallery-item {
+                width: 90%;
+            }
+        }
+        @media (min-width: 600px) {
+            .gallery-item {
+                width: 45%;
+            }
+        }
+        @media (min-width: 1000px) {
+            .gallery-item {
+                width: 30%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Well Do Ya?</h1>
+    <div class="gallery">
+        <div class="gallery-item">
+            <img src= "../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_png/Do_You_Do_Dobbs1.png" alt="Artwork 1">
+            <p class="title">DABS?</p>
+            <p class="description"> A distinguished gentleman with a top hat and monocle does cannabis dabs in a whimsical, psychedelic scene, humorously asking, “Do you do Dobbs?”.</p>
+        </div>
+        <div class="gallery-item">
+            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_png/Do_You_Do_Dobbs2.png" alt="Artwork 2">
+            <p class="title">DOBBS?</p>
+            <p class="description"> A sophisticated man in a top hat and monocle humorously contrasts his highbrow appearance by doing cannabis dabs in a colorful, psychedelic scene, asking, “Do you do Dobbs?.</p>
+        </div>
+        <div class="gallery-item">
+            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_png/Do_You_Do_Dobbs3.png" alt="Artwork 3">
+            <p class="title">DO YOU?</p>
+            <p class="description"> A gentleman in a top hat and monocle indulges in cannabis dabs in a vibrant, psychedelic scene, humorously asking, “Do you do Dobbs?”.</p>
+        </div>
+        <div class="gallery-item">
+            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_png/Do_You_Do_Dobbs4.png" alt="Artwork 4">
+            <p class="title">DO?</p>
+            <p class="description"> A sophisticated man with a top hat and monocle does cannabis dabs in a colorful, psychedelic scene, humorously asking, “Do you do Dobbs?”.</p>
+        </div>
+        <div class="gallery-item">
+            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_png/Do_You_Do_Dobbs5.png" alt="Artwork 5">
+            <p class="title">YOU?</p>
+            <p class="description"> A gentleman with a top hat and monocle engages in cannabis dabs in a vibrant, psychedelic scene, humorously asking, “Do you do Dobbs?”.</p>
+        </div>
+        <div class="gallery-item">
+            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_png/Do_You_Do_Dobbs6.png" alt="Artwork 6">
+            <p class="title">DO YOU DO DOBBS?</p>
+            <p class="description"> A distinguished gentleman in a top hat and monocle does cannabis dabs in a whimsical, psychedelic scene, humorously asking, “Do you do Dobbs?”.</p>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', () => {
+                alert('Item clicked!');
+            });
+        });
+    </script>
+</body>
+</html>
