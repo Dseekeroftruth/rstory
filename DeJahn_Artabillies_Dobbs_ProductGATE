@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Product Preview Gate</title>
+    <script src="https://rstory.mypinata.cloud/ipfs/QmRRRaytjur3gspxa9mUxaxLQhW6A19qRvp4TFweJfACkn"></script>
+    <script src="https://rstory.mypinata.cloud/ipfs/QmPrgG4X6sX3CHLLgrcQU8H8VTqh5mWqWfP6KLtfSfYKxc"></script>
+    <script src="https://unpkg.com/anchor-link@3"></script>
+    <script src="https://unpkg.com/anchor-link-browser-transport@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ethers@5.6.8/dist/ethers.umd.min.js"></script>	
+	
     <style>
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
@@ -35,9 +41,18 @@
             color: #555;
             line-height: 1.6;
         }
+		
+        .header ol {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            line-height: 1.6;			
+            text-align: left;
+        }		
+		
         .gallery {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 15px;
             margin-bottom: 40px;
         }
@@ -48,10 +63,17 @@
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
+		
+        #button-row {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }		
+		
         .gallery img:hover {
             transform: scale(1.05);
         }
-        .button {
+        button {
             display: inline-block;
             padding: 12px 24px;
             font-size: 1em;
@@ -64,7 +86,7 @@
             margin-top: 20px;
             transition: background-color 0.3s ease;
         }
-        .button:hover {
+        button:hover {
             background-color: #0056b3;
         }
         #loading {
@@ -100,24 +122,25 @@
             transition: color 0.3s ease;
         }
         a:hover {
-            color: #0056b3;
+            color: white;
+            background-color: #007bff; 
         }
-        .hidden-content {
-            display: none;
-            margin-top: 20px;
-            text-align: center;
+		
+        /* For smaller screens (2 images per row) */
+        @media (max-width: 900px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
-        .hidden-content img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
+
+        /* For the smallest screens (1 image per row) */
+        @media (max-width: 600px) {
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+        }		
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/waxjs@latest/dist/waxjs.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/anchor-link@latest/dist/anchor-link.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/anchor-link-browser-transport@latest/dist/anchor-link-browser-transport.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.umd.min.js"></script>
+
 </head>
 <body>
     <div class="container">
@@ -151,7 +174,7 @@
 
 <ol>
     <li><strong>Acquire a Token:</strong> To access the high-resolution versions of DeJahn’s artwork, you need to own either an <strong>RSTORY</strong> or <strong>TUDE</strong> token. These tokens can be purchased on cryptocurrency markets. For <strong>RSTORY</strong>, you would use the Anchor wallet on the EOS network, while <strong>TUDE</strong> is available through MetaMask on the Ethereum network.</li>
-    <li><strong>Verify Your Token:</strong> Once you have your token, connect your wallet to this gallery. The system will automatically verify your token ownership. If you have the required token, the premium content will be unlocked.<li><strong>Download the Art:</strong> After verification, you can choose to download DeJahn’s high-resolution art in either PNG or JPEG formats. These formats ensure that you experience the art in its highest quality, capturing every detail and color as DeJahn intended.</li>
+    <li><strong>Verify Your Token:</strong> Once you have your token, connect your wallet to this gallery. The system will automatically verify your token ownership. If you have the required token, the premium content will be unlocked.<li><strong>Download the Art:</strong> After verification, you can choose to download DeJahn’s high-resolution art JPEG. This format ensures that you experience the art in its highest quality, capturing every detail and color as DeJahn intended.</li>
 </ol>
 
 <h3>The Future of Art with RSTORY</h3>
@@ -167,201 +190,193 @@
         
         <!-- Image Gallery -->
         <div class="gallery">
-            <img src="../Dobbs_product/Dobbs_Low_Res/Do_You_Do_Dobbs1.jpeg" alt="Product Image 1" />
-            <img src="../Dobbs_product/Dobbs_Low_Res/Do_You_Do_Dobbs2.jpeg" alt="Product Image 2" />
-            <img src="../Dobbs_product/Dobbs_Low_Res/Do_You_Do_Dobbs3.jpeg" alt="Product Image 3" />
-            <img src="../Dobbs_product/Dobbs_Low_Res/Do_You_Do_Dobbs4.jpeg" alt="Product Image 4" />
-            <img src="../Dobbs_product/Dobbs_Low_Res/Do_You_Do_Dobbs5.jpeg" alt="Product Image 5" />
-            <img src="../Dobbs_product/Dobbs_Low_Res/Do_You_Do_Dobbs6.jpeg" alt="Product Image 6" />
-            <!-- Add as many images as needed; the grid will automatically adjust -->
+            <img src="https://rstory.mypinata.cloud/ipfs/QmbM9mAPGW2oUTmFER17vByToSuoPS3bDdp6WbWPTh9BAF/Do_You_Do_Dobbs1.jpeg" alt="Product Image 1" />
+            <img src="https://rstory.mypinata.cloud/ipfs/QmbM9mAPGW2oUTmFER17vByToSuoPS3bDdp6WbWPTh9BAF/Do_You_Do_Dobbs2.jpeg" alt="Product Image 2" />
+            <img src="https://rstory.mypinata.cloud/ipfs/QmbM9mAPGW2oUTmFER17vByToSuoPS3bDdp6WbWPTh9BAF/Do_You_Do_Dobbs3.jpeg" alt="Product Image 3" />
+            <img src="https://rstory.mypinata.cloud/ipfs/QmbM9mAPGW2oUTmFER17vByToSuoPS3bDdp6WbWPTh9BAF/Do_You_Do_Dobbs4.jpeg" alt="Product Image 4" />
+            <img src="https://rstory.mypinata.cloud/ipfs/QmbM9mAPGW2oUTmFER17vByToSuoPS3bDdp6WbWPTh9BAF/Do_You_Do_Dobbs5.jpeg" alt="Product Image 5" />
+            <img src="https://rstory.mypinata.cloud/ipfs/QmbM9mAPGW2oUTmFER17vByToSuoPS3bDdp6WbWPTh9BAF/Do_You_Do_Dobbs6.jpeg" alt="Product Image 6" />
         </div>
-
-        <a class="button" href="#" id="read-btn">Connect Anchor</a>
-        <a class="button" href="#" id="read-metamask">Connect MetaMask</a>
-
-        <!-- Hidden High-Resolution Content -->
-        <div class="hidden-content" id="high-res-content">
-            <h2><strong>High-Resolution Product Images</strong></h2>
-            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_jpeg/Do_You_Do_Dobbs1.jpeg" alt="High-Res Product Image 1 Jpg" />
-            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_jpeg/Do_You_Do_Dobbs2.jpeg" alt="High-Res Product Image 2 Jpg" />
-            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_jpeg/Do_You_Do_Dobbs3.jpeg" alt="High-Res Product Image 3 Jpg" />
-            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_jpeg/Do_You_Do_Dobbs4.jpeg" alt="High-Res Product Image 4 Jpg" />
-            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_jpeg/Do_You_Do_Dobbs5.jpeg" alt="High-Res Product Image 5 Jpg" />
-            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_jpeg/Do_You_Do_Dobbs6.jpeg" alt="High-Res Product Image 6 Jpg" />
-            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_png/Do_You_Do_Dobbs1.png" alt="High-Res Product Image 1 PNG" />
-            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_png/Do_You_Do_Dobbs2.png" alt="High-Res Product Image 2 PNG" />
-            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_png/Do_You_Do_Dobbs3.png" alt="High-Res Product Image 3 PNG" />
-            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_png/Do_You_Do_Dobbs4.png" alt="High-Res Product Image 4 PNG" />
-            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_png/Do_You_Do_Dobbs5.png" alt="High-Res Product Image 5 PNG" />
-            <img src="../Dobbs_product/Dobbs_High_Res/Dobbs_High_Res_png/Do_You_Do_Dobbs6.png" alt="High-Res Product Image 6 PNG" />
-            <!-- Add more high-res images or links to full product page as needed -->
-            <p><a class="button" href="../Dobbs_product.html"><strong>View Full Product Page</strong></a></p>
-            <p><a class="button" href="http://www.artabillies.com/dejahn"><strong>VIEW AND PURCHASE DEJAHN'S PHYSICAL ART HERE AND GAIN RSTORY TOKENS</strong></a></p>
+        <h2><strong>High-Resolution Product Images</strong></h2>
+        <ul id="gallery-list">
+            <li><a href="#" data-encoded-hash="516d61527156486243424a5162597a7a5870327664573150644e396250756939734d6f33756d4d73366f7655544d"><strong>SEE FULL GALLERY HERE AFTER CONNECTING YOUR WALLET</strong></a></li>
+			<li><a href="http://www.artabillies.com/dejahn"><strong>VIEW AND PURCHASE DEJAHN'S PHYSICAL ART HERE AND GAIN RSTORY TOKENS</strong></a></li>
+        </ul>
+        <div id="button-row">
+        <button id="read-btn">Anchor Connect</button>
+        <button id="read-metamask">Metamask Connect</button>
         </div>
-
         <!-- Tokenized Access Information Section -->
         <div class="token-info">
-            <img src="logo180.png" alt="Rstory logo" />
+            <a href="https://rstory.io"><img src="https://rstory.io/logo180.png" alt="Rstory logo" /></a>
             <h1><strong>Tokenized Access to Digital Goods</strong></h1>
             <p><strong>RSTORY</strong> is a crypto token with zero decimals that operates on multiple blockchains. <strong>RSTORY</strong> tokens are called tudes. Each one represents an indivisible unit of gratitude.</p>
-            <p>The symbol for <a href="https://etherscan.io/token/0xa9deffb371dd9c7fd2cfc6676cdb3bc394b45a42"><strong>RSTORY</strong> on Ethereum</a> is <strong>TUDE</strong>. The contract address is 0xa9deffb371dd9c7fd2cfc6676cdb3bc394b45a42. The symbol for <strong>RSTORY</strong> on EOS is <strong>RSTORY</strong>, created by the rstorytokens account. It can be viewed on <a href="https://bloks.io/tokens/RSTORY-eos-rstorytokens">Blocks.io here</a>. Read the revised <a href="https://rstory.io/rstory-whitepaper.pdf">whitepaper here</a>. Announcements can be found on the official <a href="https://hive.blog/@rstory">RSTORY communication channel</a>. Join us <a href="https://t.me/+m-WEaUc7Ud8yY2Qx">on Telegram</a> to learn more.</p>
-            <div id="loading">Page loading...</div>
-            <p>Possession of an <strong>RSTORY</strong> token grants the bearer the right to access electronic copies of Mark Bailey's science fiction novels for free. There are 7 of these novels currently available. Purchasing them all on Amazon would cost in excess of $30.</p>
-            <p>Click the button below to connect your Anchor wallet or MetaMask wallet. If there's at least one <strong>RSTORY</strong> token in your wallet, the high-resolution product images and full product page link will become accessible.</p>
+            <p>The symbol for <a href="https://etherscan.io/token/0xa9deffb371dd9c7fd2cfc6676cdb3bc394b45a42"><strong>RSTORY</strong> on Ethereum</a> is <strong>TUDE</strong>. The contract address is 0xa9deffb371dd9c7fd2cfc6676cdb3bc394b45a42. The symbol for <strong>RSTORY</strong> on EOS is <strong>RSTORY</strong>, created by the rstorytokens account. It can be viewed on <a href="https://bloks.io/tokens/RSTORY-eos-rstorytokens">Blocks.io here</a>. Read the revised <a href="https://rstory.io/rstory-whitepaper.pdf">whitepaper here</a>. Announcements can be found on the official <a href="https://hive.blog/@rstory">RSTORY communication channel</a>. Visit <a href="https://rstory.io">rstory.io</a> or join us <a href="https://t.me/+m-WEaUc7Ud8yY2Qx">on Telegram</a> to learn more.</p>
+
         </div>
     </div>
 
-    <script>
-        const dapp = "rstory";
-        let login_use = "";
-        let wallet_userAccount = "none";
-        let wallet_session = null;
+    <!-- JavaScript -->
+<script>
+function custom_decode(encoded_str) {
+    return decodeURIComponent(encoded_str.match(/.{1,2}/g).map(function (v) {
+        return '%' + ('0' + v).slice(-2);
+    }).join(''));
+}
 
-        const eos = new waxjs.WaxJS({
-            rpcEndpoint: 'https://eos.greymass.com'
+function reveal() {
+    const links = document.querySelectorAll('#gallery-list a');
+    const base_url = "https://rstory.mypinata.cloud/ipfs/";
+    links.forEach(link => {
+        const encoded_hash = link.getAttribute("data-encoded-hash");
+        if (encoded_hash) {
+            const decoded_hash = custom_decode(encoded_hash);
+            link.href = base_url + decoded_hash;
+        }
+    });
+}
+
+// JavaScript login and token check functions
+const dapp = "rstory";
+let login_use = "";
+let wallet_userAccount = "none";
+let wallet_session = null;
+
+const eos = new waxjs.WaxJS({
+    rpcEndpoint: 'https://eos.greymass.com'
+});
+
+const transport = new AnchorLinkBrowserTransport();
+const anchorLink = new AnchorLink({
+    transport,
+    chains: [{
+        chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
+        nodeUrl: 'https://eos.greymass.com',
+    }]
+});
+
+function loginEos(anchor) {
+    login_use = anchor;
+    if (anchor) {
+        login_anchor();
+    } else {
+        login_eosjs().then(function (retorno) {
+            wallet_userAccount = retorno;
+            checkToken();
         });
+    }
+}
 
-        const transport = new AnchorLinkBrowserTransport();
-        const anchorLink = new AnchorLink({
-            transport,
-            chains: [{
-                chainId: 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906',
-                nodeUrl: 'https://eos.greymass.com',
-            }]
+function login_anchor() {
+    anchorLink.login(dapp).then((result) => {
+        wallet_session = result.session;
+        wallet_userAccount = wallet_session.auth.actor;
+        checkToken();
+    });
+}
+
+async function login_eosjs() {
+    try {
+        let userAccount = await eos.login();
+        return userAccount;
+    } catch (e) {
+        document.getElementById("autologin").innerHTML = e.message;
+    }
+    return false;
+}
+
+function checkToken() {
+    const eosApiUrl = "https://eos.eosphere.io/";
+    const TokenContract = "rstorytokens";
+    const TokenSymbol = "RSTORY";
+    const jsonData = JSON.stringify({ "json": true, "code": TokenContract, "scope": wallet_userAccount, "table": "accounts", "limit": 10 });
+
+    fetch(eosApiUrl + "v1/chain/get_table_rows", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: jsonData
+    })
+        .then(response => response.json())
+        .then(data => {
+            let TokenFound = false;
+            data.rows.forEach(value => {
+                if (value.balance) {
+                    TokenFound = true;
+                    reveal();
+                    document.getElementById("loading").innerHTML = "You have " + value.balance;
+                }
+            });
+            if (!TokenFound) {
+                document.getElementById("loading").innerHTML = "You must possess RSTORY to access the material";
+            }
+        })
+        .catch(error => {
+            console.error(error);
         });
+}
 
-        function loginEos(anchor) {
-            login_use = anchor;
-            if (anchor) {
-                login_anchor();
-            } else {
-                login_eosjs().then(function (retorno) {
-                    wallet_userAccount = retorno;
-                    checkToken();
-                });
-            }
-        }
-
-        function login_anchor() {
-            anchorLink.login(dapp).then((result) => {
-                                wallet_session = result.session;
-                wallet_userAccount = wallet_session.auth.actor;
-                checkToken();
-            }).catch(error => {
-                console.error("Anchor login failed:", error
-								            
-							});
-        }
-
-        async function login_eosjs() {
-            try {
-                let userAccount = await eos.login();
-                return userAccount;
-            } catch (e) {
-                document.getElementById("loading").innerHTML = e.message;
-                return false;
-            }
-        }
-
-        function checkToken() {
-            const eosApiUrl = "https://eos.eosphere.io/";
-            const TokenContract = "rstorytokens";
-            const TokenSymbol = "RSTORY";
-            const jsonData = JSON.stringify({
-                "json": true,
-                "code": TokenContract,
-                "scope": wallet_userAccount,
-                "table": "accounts",
-                "limit": 10
-            });
-
-            fetch(eosApiUrl + "v1/chain/get_table_rows", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: jsonData
-            })
-            .then(response => response.json())
-            .then(data => {
-                let TokenFound = false;
-                data.rows.forEach(value => {
-                    if (value.balance && value.balance.includes(TokenSymbol)) {
-                        TokenFound = true;
-                        reveal();
-                        document.getElementById("loading").innerHTML = "You have " + value.balance;
-                    }
-                });
-                if (!TokenFound) {
-                    document.getElementById("loading").innerHTML = "You must possess RSTORY to access the material";
-                }
-            })
-            .catch(error => {
-                console.error("Error checking token:", error);
-            });
-        }
-
-        async function connectMetaMask() {
-            if (typeof window.ethereum !== 'undefined') {
-                try {
-                    const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-                    handleAccountsChanged(accounts);
-                } catch (error) {
-                    if (error.code === 4001) {
-                        console.log('Please connect to MetaMask.');
-                    } else {
-                        console.error("MetaMask connection error:", error);
-                    }
-                }
-            } else {
-                alert('MetaMask is not installed. Please install MetaMask to use this feature.');
-            }
-        }
-
-        function handleAccountsChanged(accounts) {
-            if (accounts.length === 0) {
+// Identify the accounts and connect MetaMask to the website.
+async function connectMetaMask() {
+    if (typeof window.ethereum !== 'undefined') {
+        try {
+            const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+            handleAccountsChanged(accounts);
+        } catch (error) {
+            if (error.code === 4001) {
                 console.log('Please connect to MetaMask.');
             } else {
-                const account = accounts[0];
-                checkMetaMaskToken(account);
+                console.error(error);
             }
         }
+    } else {
+        alert('MetaMask is not installed. Please install MetaMask to use this feature.');
+    }
+}
 
-        async function checkMetaMaskToken(account) {
-            const contractAddress = '0xa9deffb371dd9c7fd2cfc6676cdb3bc394b45a42';
-            const abi = [
-                {
-                    "constant": true,
-                    "inputs": [{ "name": "_owner", "type": "address" }],
-                    "name": "balanceOf",
-                    "outputs": [{ "name": "balance", "type": "uint256" }],
-                    "type": "function"
-                }
-            ];
+// Handle the account change and token check
+function handleAccountsChanged(accounts) {
+    if (accounts.length === 0) {
+        console.log('Please connect to MetaMask.');
+    } else {
+        const account = accounts[0];
+        checkMetaMaskToken(account);
+    }
+}
 
-            const provider = new ethers.providers.Web3Provider(window.ethereum);
-            const contract = new ethers.Contract(contractAddress, abi, provider);
-
-            try {
-                const balance = await contract.balanceOf(account);
-                if (balance.gt(0)) {
-                    reveal();
-                    document.getElementById('loading').innerHTML = `You have ${ethers.utils.formatUnits(balance, 18)} TUDEs.`;
-                } else {
-                    document.getElementById('loading').innerHTML = 'You must possess TUDE to access the material';
-                }
-            } catch (error) {
-                console.error("Error checking MetaMask token:", error);
-            }
+// Check for the Rstory token in the connected MetaMask account
+async function checkMetaMaskToken(account) {
+    const contractAddress = '0xa9deffb371dd9c7fd2cfc6676cdb3bc394b45a42';
+    const abi = [
+        // The minimal ABI to get ERC20 Token balance
+        {
+            "constant": true,
+            "inputs": [{ "name": "_owner", "type": "address" }],
+            "name": "balanceOf",
+            "outputs": [{ "name": "balance", "type": "uint256" }],
+            "type": "function"
         }
+    ];
 
-        document.getElementById('read-btn').addEventListener('click', () => loginEos(true));
-        document.getElementById('read-metamask').addEventListener('click', connectMetaMask);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const contract = new ethers.Contract(contractAddress, abi, provider);
 
-        function reveal() {
-            // Reveal the high-resolution content by displaying it
-            document.getElementById('high-res-content').style.display = 'block';
+    try {
+        const balance = await contract.balanceOf(account);
+        if (balance.gt(0)) {
+            reveal();
+            document.getElementById('loading').innerHTML = `You have ${balance.toString()} TUDEs.`;
+        } else {
+            document.getElementById('loading').innerHTML = 'You must possess TUDE to access the material';
         }
-    </script>
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+document.getElementById('read-btn').addEventListener('click', () => loginEos(true));
+document.getElementById('read-metamask').addEventListener('click', connectMetaMask);
+</script>
 </body>
 </html>
